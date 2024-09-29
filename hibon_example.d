@@ -1,5 +1,6 @@
 module hibon_example;
 
+@safe:
 import std.stdio;
 import std.range;
 import std.algorithm;
