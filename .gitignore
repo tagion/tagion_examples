@@ -1,0 +1,75 @@
+# Ignore all
+*
+
+# Unignore all with extensions
+!*.*
+!Dockerfile
+
+*.a
+
+# Unignore all dirs
+!*/
+
+.DS_Store
+
+# Emacs
+*~
+*#
+.#*
+
+# Vim
+*.vim
+
+# nix pre-commit hook
+.pre-commit-config.yaml
+
+# .lst files for code coverage
+*.lst
+# Local setup file
+local.*
+# Auto generated files
+*.gen.*
+
+# Auto generated C interface files
+*.i
+
+# Local backup
+*.parked*
+
+# Root marker
+.root
+
+# Temporary files and directories
+*.tmp
+/build/
+logs
+tools/*
+*.log
+*.way
+# Script tmp file
+*.bak
+
+#
+# Temporary wallet files
+#
+*.hibon
+
+# Unignore sample HiBON file
+!*samplehibon.hibon
+
+# Auto-generated .pem files
+pem_files
+
+tagionwave.json
+
+.dub
+.done
+
+# not finished bdd tests
+bdd/tagion/testbench/backlog/*.d
+bdd/tagion/testbench/communication/*.d
+*.drt
+*.callstack
+*.direnv
+
+src/lib-funnel/tagion/script/unitdata/
