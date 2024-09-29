@@ -2,8 +2,9 @@ export PLATFORM?=x86_64-linux
 
 export DC?=dmd
 
-MAIN+=example 
+MAIN+=hibon_example 
 
+BIN:=.
 mkfile_path := $(abspath $(lastword $(MAKEFILE_LIST)))
 export REPOROOT ::= $(dir $(mkfile_path))
 
@@ -18,6 +19,10 @@ DLIB+=$(TAGION_DLIB)/libtagion.a
 DLIB+=$(TAGION_BUILD)/tmp/secp256k1/.libs/libsecp256k1.a
 TAGIONREPO?=git@github.com:tagion/tagion.git
 TAGIONMKLOG=$(DTUB)/utilities/log.mk
+
+DVERSIONS+=REDBLACKTREE_SAFE_PROBLEM
+
+
 
 
 DFLAGS+=$(DDEBUG_SYMBOLS)

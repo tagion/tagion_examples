@@ -7,6 +7,10 @@ include config.mk
 
 all: libtagion secp256k1 
 
+run: all
+	$(PRECMD)
+	$(addprefix $(BIN)/,$(addsuffix ;,$(MAIN)))
+
 tagion-%:
 	$(PRECMD)
 	echo tag $*
@@ -56,7 +60,7 @@ endif
 
 %: %.d 
 	$(PRECMD)
-	$(DC) $(DFLAGS) $(addprefix -I,$(DINC)) $(DSRC) $< $(DLIB)	
+	$(DC) $(DFLAGS) $(addprefix -I,$(DINC)) $(addprefix $(DVERSION)=,$(DVERSIONS)) $(DSRC) $< $(OUTPUT)=$@ $(DLIB)	
 
 secp256k1: $(TAGION)/.git | tagion-secp256k1
 
@@ -69,6 +73,7 @@ $(TAGION)/.git:
 clean:
 	$(PRECMD)
 	rm -f $(MAIN)
+	rm -f *.o 
 
 proper: clean
 	$(PRECMD)
