@@ -23,6 +23,15 @@ A compleat clean-up can be do by:
 make proper
 ```
 
+The make script by default uses `dmd` compiler to change to `ldc2` just write.
+```
+# First clean the build
+make proper
+# Compile and run with ldc2
+make DC=ldc2 run
+
+```
+
 Examples:
 1. hibon_examples.d
 Sample code of how to create a HiBON record.
