@@ -38,10 +38,10 @@ help:
 
 endif
 
-libtagion: $(TAGION)/.git
-	$(PRECMD)
-	$(MAKE) -C $(TAGION) $@
+secp256k1: $(TAGION)/.git | tagion-secp256k1
+
+libtagion:  $(TAGION)/.git | tagion-libtagion 
 
 $(TAGION)/.git:
 	$(PRECMD)
-	submodule update --init --recursive
+	git clone -b current $(TAGIONREPO) $(@D)

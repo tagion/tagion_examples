@@ -10,6 +10,9 @@
 # Unignore all dirs
 !*/
 
+# tagion
+tagion
+
 .DS_Store
 
 # Emacs
