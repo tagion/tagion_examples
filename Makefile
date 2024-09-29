@@ -43,7 +43,7 @@ env:
 	$(call log.env, DFLAGS, $(DFLAGS))
 	$(call log.env, DLIB, $(DLIB))
 	$(call log.env, DINC, $(DINC))
-
+	$(call log.env, MAIN, $(MAIN))
 
 env-compiler: tagion-env-compiler
 
@@ -54,6 +54,10 @@ help:
 
 endif
 
+%: %.d 
+	$(PRECMD)
+	$(DC) $(DFLAGS) $(addprefix -I,$(DINC)) $(DSRC) $< $(DLIB)	
+
 secp256k1: $(TAGION)/.git | tagion-secp256k1
 
 libtagion:  $(TAGION)/.git | tagion-libtagion 
@@ -63,6 +67,8 @@ $(TAGION)/.git:
 	git clone -b current $(TAGIONREPO) $(@D)
 
 clean:
+	$(PRECMD)
+	rm -f $(MAIN)
 
 proper: clean
 	$(PRECMD)

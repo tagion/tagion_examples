@@ -36,6 +36,9 @@ local.*
 # Auto generated C interface files
 *.i
 
+# Object files
+*.o 
+
 # Local backup
 *.parked*
 
