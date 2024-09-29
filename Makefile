@@ -5,7 +5,7 @@
 
 include config.mk
 
-all: libtagion 
+all: libtagion secp256k1 
 
 tagion-%:
 	$(PRECMD)
@@ -13,10 +13,16 @@ tagion-%:
 	$(MAKE) -C $(TAGION) $*
 
 test33:
-	echo $(TAGION)
-	echo $(TAGIONMKLOG)
+	@
+	echo TAGION $(TAGION)
+	echo TAGIONMKLOG $(TAGIONMKLOG)
+	echo DTUB $(DTUB)
+	echo DTARGETS $(DTARGETS)
 
--include $(TAGION)/tub/utilities/log.mk
+-include $(TAGIONREPO)
+-include $(DTUB)/utilities/log.mk
+-include $(DTARGETS)/install.mk
+-include $(DTARGETS)/compiler.mk
 
 ifdef log.info
 help:
@@ -29,7 +35,17 @@ help:
 env:
 	$(PRECMD)
 	$(call log.header, $@ :: env)
+	$(call log.kvp, REPOROOT, $(REPOROOT))
+	$(call log.kvp, TAGION, $(TAGION))
+	$(call log.kvp, DTAGION_SRC, $(DTAGION_SRC))
+	$(call log.kvp, TAGION_BUILD, $(TAGION_BUILD))
+	$(call log.kvp, TAGION_DLIB, $(TAGION_DLIB))
+	$(call log.env, DFLAGS, $(DFLAGS))
+	$(call log.env, DLIB, $(DLIB))
+	$(call log.env, DINC, $(DINC))
 
+
+env-compiler: tagion-env-compiler
 
 else
 help:
@@ -45,3 +61,10 @@ libtagion:  $(TAGION)/.git | tagion-libtagion
 $(TAGION)/.git:
 	$(PRECMD)
 	git clone -b current $(TAGIONREPO) $(@D)
+
+clean:
+
+proper: clean
+	$(PRECMD)
+	rm -fR tagion
+
