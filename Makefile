@@ -74,7 +74,7 @@ endif
 
 %: %.d 
 	$(PRECMD)
-	$(DC) $(DFLAGS) $(addprefix -I,$(DINC)) $(addprefix $(DVERSION)=,$(DVERSIONS)) $(DSRC) $< $(OUTPUT)=$@ $(DLIB)	
+	$(DC) $(DFLAGS) $(addprefix -I,$(DINC)) $(addprefix $(DVERSION)=,$(DVERSIONS)) $(DSRC) $< $(DOUT)=$@ $(DLIB)	
 
 secp256k1: $(TAGION)/.git | tagion-secp256k1
 
