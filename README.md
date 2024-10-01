@@ -33,8 +33,10 @@ make DC=ldc2 run
 ```
 
 Examples:
-1. hibon_examples.d
+1. hibon_example.d
 Sample code of how to create a HiBON record.
+2. dart_example.d
+Sample code of how to create a DART database.
 
 
 

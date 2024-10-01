@@ -3,6 +3,7 @@ export PLATFORM?=x86_64-linux
 export DC?=dmd
 
 MAIN+=hibon_example 
+MAIN+=dart_example 
 
 BIN:=.
 mkfile_path := $(abspath $(lastword $(MAKEFILE_LIST)))
