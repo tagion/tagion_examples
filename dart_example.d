@@ -22,6 +22,15 @@ struct MyHiBON {
     mixin HiBONRecord;
 }
 
+struct MyName {
+    @label("#some") string name;
+    int count;
+    @label("OtherName") long value;
+    @label("binary") Buffer buf; 
+    mixin HiBONRecord;
+}
+
+
 void main() {
 
     auto net=new StdSecureNet;
@@ -39,15 +48,22 @@ void main() {
     {
         Buffer buf=[1,2,3,4];
         const my1 = MyHiBON("my name", 42, -100, buf);
-        const my2 = MyHiBON("my name", 42, 100, buf);
+        const my2 = MyHiBON("my name", 43, 100, buf);
+        const my3 = MyName("some name", 44, 11, buf);
+
         
         dart_indices~=net.dartIndex(my1);
         dart_indices~=net.dartIndex(my2);
+        dart_indices~=net.dartIndex(my3);
 
+        writefln("my2 fingerprint %(%02x%) dartindex =%(%02x%)", net.calcHash(my2.toDoc), net.dartIndex(my2));
+        writefln("my3 fingerprint %(%02x%) dartindex =%(%02x%)", net.calcHash(my3.toDoc), net.dartIndex(my3));
+        writefln("my3 dartindex = %(%02x%)", net.dartKey("#some", "some name"));
         // Create a recorder;
         auto rec = db.recorder;
         rec.add(my1);
         rec.add(my2);
+        rec.add(my3);
         const bullseye=db.modify(rec);
         writefln("bullseye=%(%02x%)", bullseye);
     }
