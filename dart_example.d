@@ -11,6 +11,7 @@ import tagion.basic.Types : Buffer;
 import tagion.hibon;
 import tagion.dart;
 import tagion.crypto;
+import tagion.communication;
 
 @recordType("TypeName")
 struct MyHiBON {
@@ -53,4 +54,18 @@ void main() {
 
     writefln("dart_indices= %(%(%02x%) %)", dart_indices);
 
+    const hirpc = HiRPC(net);
+    /// DART dartRead RPC sender
+    const sender = CRUD.dartRead(dart_indices, hirpc);
+    writefln("dartRead RPC=%s", sender.toPretty);
+    /// DART receiver
+    const receiver = hirpc.receive(sender); 
+    const response = db(receiver);
+
+    writefln("response=%s", response.toPretty);
+
+    auto factory = RecordFactory(net);
+    auto recorder = factory.recorder(response.result);
+    writefln("Recorder dart-indices=%(%(%02x%) %)",recorder[].map!(a => a.dart_index));
+    writefln("archives =%-(%s\n%)",recorder[].map!(a => a.filed.toPretty));
 }
