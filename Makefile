@@ -82,7 +82,7 @@ libtagion:  $(TAGION)/.git | tagion-libtagion
 
 $(TAGION)/.git:
 	$(PRECMD)
-	git clone -b current $(TAGIONREPO) $(@D)
+	git clone -b master $(TAGIONREPO) $(@D)
 
 clean:
 	$(PRECMD)
